@@ -14,46 +14,173 @@
   <style>
     :root {
       --purple: #7B2CBF;
+      --purple-light: #9D4EDD;
+      --purple-dark: #5A189A;
+      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-alt: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --shadow: 0 20px 40px rgba(0,0,0,0.1);
+      --shadow-hover: 0 25px 50px rgba(0,0,0,0.15);
     }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
-      display: flex;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+                   "Helvetica Neue", Arial, sans-serif;
       min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background-attachment: fixed;
+      display: flex;
       align-items: center;
       justify-content: center;
-      background: #fafafa;
+      padding: 20px;
     }
+    
     .card {
       text-align: center;
-      padding: 2.5rem 2rem;
-      max-width: 460px;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.06);
-      background: #fff;
+      padding: 3rem 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+      animation: cardFloat 6s ease-in-out infinite;
     }
+    
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .logo {
+      border-radius: 28px;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.15));
+    }
+    
     h1 {
-      margin: 1rem 0 .5rem;
-      color: var(--purple);
+      margin: 1.5rem 0 0.5rem;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
     }
-    p { color:#555; }
+    
+    .subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+    
+    .features {
+      display: flex;
+      justify-content: space-around;
+      margin: 2rem 0;
+      gap: 1rem;
+    }
+    
+    .feature {
+      text-align: center;
+      flex: 1;
+    }
+    
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 0.5rem;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+    }
+    
+    .feature-text {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 500;
+    }
+    
     .store-buttons {
       display: flex;
       justify-content: center;
-      gap: 0.8rem; /* space between buttons */
+      gap: 1rem;
+      margin-top: 2.5rem;
     }
+    
     .store-buttons a {
-      text-decoration: none; /* remove underline/underscore under images */
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
     }
+    
+    .store-buttons a:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+    
     .store-buttons img {
       height: 56px;
-      width: 168px; /* fixed width to match standard store badge proportions */
-      object-fit: contain; /* maintain aspect ratio within the bounds */
+      width: 168px;
+      object-fit: contain;
+      transition: all 0.3s ease;
     }
-    /* Rounded corners for the main logo */
-    .logo {
+    
+    .coming-soon {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(135deg, rgba(123, 44, 191, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%);
+      border: 1px solid rgba(123, 44, 191, 0.2);
       border-radius: 20px;
+      color: var(--purple-dark);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    @media (max-width: 480px) {
+      .card {
+        padding: 2rem 1.5rem;
+        margin: 10px;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .features {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .store-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
     }
   </style>
 
@@ -73,7 +200,22 @@
   <div class="card">
     <img src="logo.png" alt="Pelicash logo" class="logo" style="height:120px"/>
     <h1>Pelicash</h1>
-    <p>Australia's smartest way to stack cashback and OzBargain deals.</p>
+    <p class="subtitle">Australia's smartest way to stack cashback and OzBargain deals together in one beautiful app.</p>
+    
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">💰</div>
+        <div class="feature-text">Best Cashback</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔥</div>
+        <div class="feature-text">Hot Deals</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-text">Lightning Fast</div>
+      </div>
+    </div>
 
     <div class="store-buttons">
       <a href="https://apps.apple.com/app/id6746528566">
@@ -84,6 +226,10 @@
         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
           alt="Get it on Google Play">
       </a>
+    </div>
+    
+    <div class="coming-soon">
+      🚀 Join thousands of Aussies saving money every day
     </div>
   </div>
 </body>
