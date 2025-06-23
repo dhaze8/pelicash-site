@@ -38,9 +38,22 @@
       color: var(--purple);
     }
     p { color:#555; }
+    .store-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem; /* space between buttons */
+    }
+    .store-buttons a {
+      text-decoration: none; /* remove underline/underscore under images */
+    }
     .store-buttons img {
       height: 56px;
-      margin: 0 .4rem;
+      width: 168px; /* fixed width to match standard store badge proportions */
+      object-fit: contain; /* maintain aspect ratio within the bounds */
+    }
+    /* Rounded corners for the main logo */
+    .logo {
+      border-radius: 20px;
     }
   </style>
 
@@ -58,9 +71,9 @@
 </head>
 <body>
   <div class="card">
-    <img src="logo.png" alt="Pelicash logo" style="height:120px"/>
+    <img src="logo.png" alt="Pelicash logo" class="logo" style="height:120px"/>
     <h1>Pelicash</h1>
-    <p>Australia’s smartest way to stack cashback and OzBargain deals.</p>
+    <p>Australia's smartest way to stack cashback and OzBargain deals.</p>
 
     <div class="store-buttons">
       <a href="https://apps.apple.com/app/id6746528566">
