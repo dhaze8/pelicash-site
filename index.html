@@ -20,10 +20,15 @@
       --purple: #7B2CBF;
       --purple-light: #9D4EDD;
       --purple-dark: #5A189A;
-      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --gradient-alt: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      --shadow: 0 20px 40px rgba(0,0,0,0.1);
-      --shadow-hover: 0 25px 50px rgba(0,0,0,0.15);
+      --orange: #f97316;
+      --orange-light: #fb923c;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
     }
     
     * {
@@ -34,483 +39,723 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
                    "Helvetica Neue", Arial, sans-serif;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      background-attachment: fixed;
-      overflow-x: hidden;
+      line-height: 1.6;
+      color: var(--slate-700);
+      background: white;
     }
-    
-    .container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-    }
-    
-    /* Floating shapes for visual interest */
-    .bg-shapes {
-      position: absolute;
+
+    /* Navigation */
+    .navbar {
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--slate-200);
+      transition: all 0.2s;
     }
-    
-    .shape {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      animation: float 6s ease-in-out infinite;
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
     }
-    
-    .shape:nth-child(1) {
-      width: 80px;
-      height: 80px;
-      top: 20%;
-      left: 10%;
-      animation-delay: -2s;
+
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
     }
-    
-    .shape:nth-child(2) {
-      width: 120px;
-      height: 120px;
-      top: 60%;
-      right: 10%;
-      animation-delay: -4s;
-    }
-    
-    .shape:nth-child(3) {
-      width: 60px;
-      height: 60px;
-      top: 80%;
-      left: 20%;
-      animation-delay: -1s;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(180deg); }
-    }
-    
-    .hero {
+
+    .nav-logo {
       display: flex;
       align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 40px 20px;
-      position: relative;
-      z-index: 2;
+      gap: 0.5rem;
+      text-decoration: none;
     }
-    
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 60px;
-      align-items: center;
-      max-width: 1200px;
-      width: 100%;
+
+    .nav-logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
     }
-    
-    .hero-left {
-      text-align: right;
-    }
-    
-    .hero-center {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 32px;
-      padding: 3rem 2.5rem;
-      box-shadow: var(--shadow);
-      animation: cardFloat 6s ease-in-out infinite;
-      min-width: 400px;
-    }
-    
-    .hero-right {
-      text-align: left;
-    }
-    
-    @keyframes cardFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    
-    .phone-mockup {
-      position: relative;
-      transform: perspective(1000px) rotateY(-15deg);
-      transition: all 0.6s ease;
-    }
-    
-    .phone-mockup:hover {
-      transform: perspective(1000px) rotateY(-5deg) translateY(-10px);
-    }
-    
-    .phone-mockup.right {
-      transform: perspective(1000px) rotateY(15deg);
-    }
-    
-    .phone-mockup.right:hover {
-      transform: perspective(1000px) rotateY(5deg) translateY(-10px);
-    }
-    
-    .phone-frame {
-      width: 280px;
-      height: 560px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 
-        0 0 0 2px rgba(255, 255, 255, 0.2),
-        0 20px 40px rgba(0,0,0,0.15),
-        inset 0 0 0 1px rgba(255,255,255,0.3);
-      position: relative;
-    }
-    
-    .phone-frame::before {
-      content: '';
-      position: absolute;
-      top: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 3px;
-    }
-    
-    .phone-screen {
-      width: 100%;
-      height: calc(100% - 15px);
-      margin-top: 18px;
-      border-radius: 28px;
-      overflow: hidden;
-      background: #000;
-    }
-    
-    .phone-screen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center -18px;
-    }
-    
-    .logo {
-      border-radius: 28px;
-      transition: all 0.3s ease;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
-      margin-bottom: 1rem;
-    }
-    
-    .logo:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.15));
-    }
-    
-    h1 {
-      margin: 0 0 1rem;
-      font-size: 3rem;
-      font-weight: 800;
+
+    .nav-logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
       background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
     }
-    
-    .subtitle {
-      color: #666;
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 2.5rem;
-      font-weight: 400;
+
+    .nav-links {
+      display: none;
+      gap: 2rem;
     }
-    
-    .features {
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--slate-600);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--slate-900);
+    }
+
+    .download-btn {
+      display: none;
+      background: var(--purple);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+      border: none;
+    }
+
+    .download-btn:hover {
+      background: var(--purple-dark);
+      transform: translateY(-1px);
+    }
+
+    @media (min-width: 1024px) {
+      .nav-links, .download-btn {
+        display: flex;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .hero-content {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin: 2.5rem 0;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 2rem 0 4rem;
     }
-    
-    .feature {
+
+    @media (min-width: 1024px) {
+      .hero-content {
+        grid-template-columns: 1fr auto;
+        gap: 5rem;
+        padding: 3rem 0 6rem;
+      }
+    }
+
+    .hero-text {
       text-align: center;
-      padding: 1.5rem 1rem;
-      background: rgba(123, 44, 191, 0.08);
-      border-radius: 20px;
-      border: 1px solid rgba(123, 44, 191, 0.1);
-      transition: all 0.3s ease;
     }
-    
-    .feature:hover {
-      transform: translateY(-3px);
-      background: rgba(123, 44, 191, 0.12);
-      box-shadow: 0 10px 20px rgba(123, 44, 191, 0.1);
+
+    @media (min-width: 1024px) {
+      .hero-text {
+        text-align: left;
+        order: 1;
+      }
     }
-    
-    .feature-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 1rem;
-      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
-      border-radius: 18px;
+
+    .trial-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(to right, #f3e8ff, #e0e7ff);
+      border: 1px solid #c4b5fd;
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--purple-dark);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--purple);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 1rem;
+      color: var(--slate-900);
+      letter-spacing: -0.025em;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .hero-title {
+        font-size: 3.75rem;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--slate-600);
+      margin: 0 0 2rem;
+      max-width: 36rem;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-subtitle {
+        max-width: none;
+      }
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .cta-buttons {
+        flex-direction: row;
+      }
+    }
+
+    .btn-primary {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 28px;
+      gap: 0.5rem;
+      background: var(--orange);
       color: white;
-      box-shadow: 0 8px 16px rgba(123, 44, 191, 0.3);
-    }
-    
-    .feature-text {
-      font-size: 1rem;
-      color: #444;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
       font-weight: 600;
+      transition: all 0.2s;
+      border: 2px solid transparent;
     }
-    
-    .store-buttons {
+
+    .btn-primary:hover {
+      background: #ea580c;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: white;
+      color: var(--slate-900);
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--slate-900);
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--slate-100);
+    }
+
+    .hero-visual {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      margin-top: 3rem;
+      position: relative;
     }
-    
-    .store-buttons a {
-      text-decoration: none;
-      transition: all 0.4s ease;
+
+    @media (min-width: 1024px) {
+      .hero-visual {
+        order: 2;
+      }
+    }
+
+    .phone-mockup {
+      position: relative;
+      max-width: 300px;
+      width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+      .phone-mockup {
+        max-width: 350px;
+      }
+    }
+
+    .phone-frame {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      border: 8px solid #1a1a1a;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+
+    .phone-frame:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Features Section */
+    .features-section {
+      background: var(--slate-50);
+      padding: 4rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin: 0 0 1rem;
+      line-height: 1.2;
+    }
+
+    @media (min-width: 1024px) {
+      .section-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: var(--slate-600);
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: white;
+      padding: 2rem;
       border-radius: 16px;
-      overflow: hidden;
-      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
-    }
-    
-    .store-buttons a:hover {
-      transform: translateY(-4px) scale(1.02);
-      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.15)) brightness(1.05);
-    }
-    
-    .store-buttons img {
-      height: 60px;
-      width: 180px;
-      object-fit: scale-down;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
       transition: all 0.3s ease;
     }
-    
-    .cta-banner {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      background: linear-gradient(135deg, rgba(123, 44, 191, 0.15) 0%, rgba(157, 78, 221, 0.15) 100%);
-      border: 1px solid rgba(123, 44, 191, 0.2);
-      border-radius: 25px;
-      color: var(--purple-dark);
-      font-size: 1rem;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(123, 44, 191, 0.1);
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
-    
-    .stats {
-      position: absolute;
-      top: 25%;
-      left: 50px;
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      padding: 1.5rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      animation: statsFloat 4s ease-in-out infinite;
-    }
-    
-    @keyframes statsFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    
-    .stats h3 {
-      margin: 0 0 0.5rem;
-      color: var(--purple);
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 1.5rem;
+      margin-top: 0.25rem;
+    }
+
+    .feature-content h3 {
+      font-size: 1.125rem;
       font-weight: 700;
+      color: var(--slate-900);
+      margin: 0 0 0.5rem;
     }
-    
-    .stats p {
+
+    .feature-content p {
+      color: var(--slate-600);
       margin: 0;
-      color: #666;
-      font-size: 0.9rem;
+      line-height: 1.6;
     }
-    
-    .floating-badge {
-      position: absolute;
-      bottom: 30%;
-      right: 50px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      padding: 1rem 1.5rem;
-      border-radius: 50px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      animation: badgeFloat 5s ease-in-out infinite;
+
+    /* Download Section */
+    .download-section {
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .download-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--slate-900);
+      margin: 0 0 1rem;
+    }
+
+    @media (min-width: 1024px) {
+      .download-title {
+        font-size: 2.5rem;
+      }
+    }
+
+    .download-subtitle {
+      font-size: 1.125rem;
+      color: var(--slate-600);
+      margin: 0 0 3rem;
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 640px) {
+      .store-buttons {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    .store-button {
+      transition: all 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .store-button:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.05);
+    }
+
+    .store-button img {
+      height: 60px;
+      width: auto;
+    }
+
+    /* Ensure both store buttons have the same height */
+    .cta-buttons .store-button img {
+      height: 60px !important;
+      width: 200px !important;
+      object-fit: contain;
+    }
+
+    /* Make Google Play badge larger to match App Store */
+    .cta-buttons .store-button:last-child img {
+      height: 83px !important;
+      width: auto !important;
+    }
+
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(123, 44, 191, 0.1) 0%, rgba(157, 78, 221, 0.1) 100%);
+      border: 1px solid rgba(123, 44, 191, 0.2);
+      border-radius: 16px;
+      padding: 1rem 2rem;
+      display: inline-block;
+      color: var(--purple-dark);
+      font-weight: 600;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--slate-900) 0%, var(--slate-800) 100%);
+      padding: 5rem 0;
+      margin: 4rem 0 0;
+    }
+
+    .cta-content {
+      text-align: center;
+      max-width: 48rem;
+      margin: 0 auto;
+    }
+
+    .cta-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(147, 51, 234, 0.2);
+      border: 1px solid rgba(147, 51, 234, 0.3);
+      border-radius: 9999px;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #c4b5fd;
+    }
+
+    .cta-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: white;
+      margin: 0 0 1rem;
+      line-height: 1.2;
+    }
+
+    @media (min-width: 1024px) {
+      .cta-title {
+        font-size: 3rem;
+      }
+    }
+
+    .cta-subtitle {
+      font-size: 1.125rem;
+      color: #cbd5e1;
+      margin: 0 0 2rem;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    @media (min-width: 640px) {
+      .cta-buttons {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    .btn-cta-primary {
+      position: relative;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    
-    @keyframes badgeFloat {
-      0%, 100% { transform: translateY(0px) rotate(-2deg); }
-      50% { transform: translateY(-10px) rotate(2deg); }
+
+    .btn-cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(123, 44, 191, 0.3);
     }
-    
-    .floating-badge .emoji {
-      font-size: 1.5rem;
-    }
-    
-    .floating-badge .text {
-      color: var(--purple);
+
+    .btn-cta-secondary {
+      background: rgba(71, 85, 105, 0.5);
+      color: white;
+      border: 1px solid #64748b;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    
-    @media (max-width: 1024px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-      }
-      
-      .hero-left, .hero-right {
-        text-align: center;
-      }
-      
-      .phone-mockup, .phone-mockup.right {
-        transform: none;
-      }
-      
-      .phone-mockup:hover, .phone-mockup.right:hover {
-        transform: translateY(-10px);
-      }
-      
-      .stats, .floating-badge {
-        position: static;
-        margin: 1rem auto;
-        display: inline-block;
-      }
-      
-      .hero-center {
-        min-width: auto;
-        max-width: 500px;
-      }
+
+    .btn-cta-secondary:hover {
+      background: rgba(100, 116, 139, 0.5);
     }
-    
-    @media (max-width: 768px) {
-      .hero {
-        padding: 20px;
-      }
-      
-      .hero-center {
-        padding: 2rem 1.5rem;
-      }
-      
-      h1 {
-        font-size: 2.5rem;
-      }
-      
-      .features {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
-      
-      .store-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .phone-frame {
-        width: 240px;
-        height: 480px;
-      }
+
+    .cta-features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 5rem 0 2rem;
+      text-align: center;
+    }
+
+    .footer p {
+      color: var(--slate-600);
+      margin: 0.5rem 0;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--slate-500);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--slate-700);
+    }
+
+    /* Icon styles */
+    .icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: currentColor;
     }
   </style>
-
-  <!-- Optional: simple JS redirect based on device -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const ua = navigator.userAgent || '';
-      if (/iPad|iPhone|iPod/.test(ua)) {
-        // window.location.href = 'https://apps.apple.com/app/your-id';
-      } else if (/Android/i.test(ua)) {
-        // window.location.href = 'https://play.google.com/store/apps/details?id=your.id';
-      }
-    });
-  </script>
 </head>
 <body>
-  <div class="container">
-    <div class="bg-shapes">
-      <div class="shape"></div>
-      <div class="shape"></div>
-      <div class="shape"></div>
-    </div>
-    <div class="hero">
-      <div class="hero-content">
-        <div class="hero-left">
-          <div class="phone-mockup">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <img src="ss1.png" alt="Pelicash app screenshot 1">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="hero-center">
-          <img src="logo.png" alt="Pelicash logo" class="logo" style="height:120px"/>
-          <h1>Pelicash</h1>
-          <p class="subtitle">Australia's smartest way to stack cashback and OzBargain deals together in one beautiful app.</p>
-          
-          <div class="features">
-            <div class="feature">
-              <div class="feature-icon">💰</div>
-              <div class="feature-text">Best Cashback Rates</div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">🛍️</div>
-              <div class="feature-text">OzBargain Deals</div>
-            </div>
-            <div class="feature">
-              <div class="feature-icon">🔔</div>
-              <div class="feature-text">Instant Notifications</div>
-            </div>
-          </div>
 
-          <div class="store-buttons">
-            <a href="https://apps.apple.com/app/id6746528566">
-              <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                alt="Download on the App Store">
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.luupapps.pelicash">
-              <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
-                alt="Get it on Google Play">
-            </a>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="trial-badge">
+          <div class="pulse-dot"></div>
+          <span>Free to Download</span>
+        </div>
+        <div class="trial-badge" style="margin-left: 0.5rem;">
+          <div class="pulse-dot"></div>
+          <span>No Account Required</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Smart savings like never before.
+        </h1>
+        
+        <p class="hero-subtitle">
+          Unlock the best cashback rates with data-driven intelligence. Start maximizing your savings today.
+        </p>
+        
+        <div class="cta-buttons">
+          <a href="https://apps.apple.com/app/id6746528566" class="store-button">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.luupapps.pelicash" class="store-button">
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" style="height: 166px; width: auto;">
+          </a>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="phone-mockup">
+          <img src="ss1.png" alt="Pelicash app screenshot" class="phone-frame">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">
+          Master your savings strategy
+        </h2>
+        <p class="section-subtitle">
+          Pelicash gives you complete visibility into cashback opportunities and deal alerts, helping you optimize your spending for maximum savings across all your purchases.
+        </p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 5L5 19" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="6.5" cy="6.5" r="2.5" stroke="white" stroke-width="2"/>
+              <circle cx="17.5" cy="17.5" r="2.5" stroke="white" stroke-width="2"/>
+            </svg>
           </div>
-          
-          <div class="cta-banner">
-            🚀 Start maximising your savings for free!
+          <div class="feature-content">
+            <h3>Best Cashback Rates</h3>
+            <p>Automatically find and apply the highest cashback rates from multiple providers, ensuring you never miss out on savings opportunities.</p>
           </div>
         </div>
-        <div class="hero-right">
-          <div class="phone-mockup right">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <img src="ss2.png" alt="Pelicash app screenshot 2">
-              </div>
-            </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3v18h18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 17V9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13 17V5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 17v-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h3>Savings Analytics</h3>
+            <p>Access historic cashback rate data with beautiful graphs showing trends over time. Make informed decisions with comprehensive rate history and analytics.</p>
+          </div>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M6.31317 12.463C6.20006 9.29213 8.60976 6.6252 11.701 6.5C14.7923 6.6252 17.202 9.29213 17.0889 12.463C17.0889 13.78 18.4841 15.063 18.525 16.383C18.525 16.4017 18.525 16.4203 18.525 16.439C18.5552 17.2847 17.9124 17.9959 17.0879 18.029H13.9757C13.9786 18.677 13.7404 19.3018 13.3098 19.776C12.8957 20.2372 12.3123 20.4996 11.701 20.4996C11.0897 20.4996 10.5064 20.2372 10.0923 19.776C9.66161 19.3018 9.42346 18.677 9.42635 18.029H6.31317C5.48869 17.9959 4.84583 17.2847 4.87602 16.439C4.87602 16.4203 4.87602 16.4017 4.87602 16.383C4.91795 15.067 6.31317 13.781 6.31317 12.463Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9.42633 17.279C9.01212 17.279 8.67633 17.6148 8.67633 18.029C8.67633 18.4432 9.01212 18.779 9.42633 18.779V17.279ZM13.9757 18.779C14.3899 18.779 14.7257 18.4432 14.7257 18.029C14.7257 17.6148 14.3899 17.279 13.9757 17.279V18.779ZM12.676 5.25C13.0902 5.25 13.426 4.91421 13.426 4.5C13.426 4.08579 13.0902 3.75 12.676 3.75V5.25ZM10.726 3.75C10.3118 3.75 9.97601 4.08579 9.97601 4.5C9.97601 4.91421 10.3118 5.25 10.726 5.25V3.75ZM9.42633 18.779H13.9757V17.279H9.42633V18.779ZM12.676 3.75H10.726V5.25H12.676V3.75Z" fill="white"/>
+            </svg>
+          </div>
+          <div class="feature-content">
+            <h3>Smart Notifications</h3>
+            <p>Receive personalized alerts when your favorite stores have deals, combining cashback opportunities with bargain prices.</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+
+
+
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Copyright © 2025 Pelicash. All rights reserved.</p>
+      
+      <div class="footer-links">
+        <a href="https://privacy.pelicash.com.au/">Privacy Policy</a>
+        <a href="https://tos.pelicash.com.au/">Terms of Service</a>
+        <a href="mailto:luupapps@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
